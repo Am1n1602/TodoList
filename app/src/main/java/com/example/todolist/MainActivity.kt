@@ -1,47 +1,38 @@
 package com.example.todolist
 
 import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.example.todolist.ui.theme.TodoListTheme
+import androidx.appcompat.app.AppCompatActivity
+import android.widget.Button
+import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.LinearLayoutManager
 
-class MainActivity : ComponentActivity() {
+class MainActivity : AppCompatActivity() {
+
+    private lateinit var todoAdapter: TodoAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContent {
-            TodoListTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
+        setContentView(R.layout.activity_main)
+        val rvTodoItems = findViewById<RecyclerView>(R.id.rvTodoItems)
+        todoAdapter = TodoAdapter(mutableListOf())
+
+        rvTodoItems.adapter = todoAdapter
+        rvTodoItems.layoutManager = LinearLayoutManager(this)
+
+        val btAddTodo = findViewById<Button>(R.id.btaddTodo)
+        btAddTodo.setOnClickListener {
+            val etTodo = findViewById<TextView>(R.id.etTodoTitle)
+            val todoTitle = etTodo.text.toString()
+            if(todoTitle.isNotEmpty()) {
+                val todo = Todo(todoTitle)
+                todoAdapter.addTodo(todo)
+                etTodo.text = ""
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    TodoListTheme {
-        Greeting("Android")
+        val btDelete = findViewById<Button>(R.id.btdeleteTodo)
+        btDelete.setOnClickListener {
+            todoAdapter.deleteTodo()
+        }
     }
 }
