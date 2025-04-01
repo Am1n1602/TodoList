@@ -3,7 +3,7 @@ package com.example.todolist
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.widget.Button
-import android.widget.TextView
+import android.widget.EditText
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.LinearLayoutManager
 
@@ -22,12 +22,12 @@ class MainActivity : AppCompatActivity() {
 
         val btAddTodo = findViewById<Button>(R.id.btaddTodo)
         btAddTodo.setOnClickListener {
-            val etTodo = findViewById<TextView>(R.id.etTodoTitle)
+            val etTodo = findViewById<EditText>(R.id.etTodoTitle)
             val todoTitle = etTodo.text.toString()
             if(todoTitle.isNotEmpty()) {
                 val todo = Todo(todoTitle)
                 todoAdapter.addTodo(todo)
-                etTodo.text = ""
+                etTodo.text.clear()
             }
         }
         val btDelete = findViewById<Button>(R.id.btdeleteTodo)
