@@ -1,1 +1,1 @@
-Created a simplegit Todolist app in Kotlin :) 
+Created a simple Todolist app in Kotlin :) 
