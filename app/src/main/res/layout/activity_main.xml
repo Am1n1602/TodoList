@@ -19,6 +19,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="Enter Todo Items"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btaddTodo"
         app:layout_constraintStart_toStartOf="parent" />
@@ -27,8 +28,11 @@
         android:id="@+id/btaddTodo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="1dp"
+        android:layout_margin="3dp"
+        android:background="@drawable/rounded_button"
         android:text="Add Todo"
+        android:padding="5dp"
+        android:textColor="@color/teal_200"
         app:layout_constraintEnd_toStartOf="@+id/btdeleteTodo"
         app:layout_constraintBottom_toBottomOf="parent"
         tools:layout_editor_absoluteY="866dp" />
@@ -38,6 +42,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Delete Todo"
+        android:layout_margin="3dp"
+        android:padding="5dp"
+        android:textColor="@color/teal_200"
+        android:background="@drawable/rounded_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
