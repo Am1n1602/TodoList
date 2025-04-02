@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -11,15 +10,23 @@
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/etTodoTitle"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <EditText
         android:id="@+id/etTodoTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="Enter Todo Items"
-
+        android:background="@drawable/et_background"
+        android:hint="@string/et_hint"
+        android:textColorHint="@color/text_color"
+        android:padding="12dp"
+        android:textColor="@color/text_color"
+        android:layout_marginRight="6dp"
+        android:layout_marginLeft="6dp"
+        android:layout_marginBottom="3dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btaddTodo"
         app:layout_constraintStart_toStartOf="parent" />
@@ -28,24 +35,23 @@
         android:id="@+id/btaddTodo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="3dp"
-        android:background="@drawable/rounded_button"
-        android:text="Add Todo"
-        android:padding="5dp"
-        android:textColor="@color/teal_200"
-        app:layout_constraintEnd_toStartOf="@+id/btdeleteTodo"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="3dp"
+        android:background="@drawable/add_round_button"
+        android:text="@string/button_add"
+        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_editor_absoluteY="866dp" />
+        app:layout_constraintEnd_toStartOf="@+id/btdeleteTodo" />
 
     <Button
         android:id="@+id/btdeleteTodo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Delete Todo"
-        android:layout_margin="3dp"
-        android:padding="5dp"
-        android:textColor="@color/teal_200"
-        android:background="@drawable/rounded_button"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="3dp"
+        android:background="@drawable/delete_round_buttom"
+        android:text="@string/button_delete"
+        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

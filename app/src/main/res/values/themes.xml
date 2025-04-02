@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.TodoList" parent="Theme.AppCompat.DayNight.DarkActionBar" />
+    <style name="Theme.TodoList" parent="Theme.AppCompat.DayNight.DarkActionBar">
+        <item name="colorPrimary">@color/teal</item>
+        <item name="colorAccent">@color/coral</item>
+        <item name="android:windowBackground">@color/light_beige</item>
+    </style>
 </resources>
