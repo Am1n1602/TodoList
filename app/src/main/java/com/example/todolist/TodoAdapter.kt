@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 class TodoAdapter(
     private val todos: MutableList<Todo>
 ) : RecyclerView.Adapter<TodoAdapter.TodoViewHolder>() {
+
     class TodoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodoViewHolder {
@@ -23,18 +24,14 @@ class TodoAdapter(
         )
     }
 
-    fun addTodo(todo: Todo) {
-        todos.add(todo)
-        notifyItemInserted(todos.size-1)
-    }
-
-    fun deleteTodo() {
-        todos.removeAll { todo ->
-            todo.isCompleted
-        }
+    // Called when LiveData sends a new list.
+    fun setTodos(newTodos: MutableList<Todo>) {
+        todos.clear()
+        todos.addAll(newTodos)
         notifyDataSetChanged()
     }
 
+    // Helper function to toggle strikethrough.
     private fun switchStrikeThrough(tvTodoTitle: TextView, isCompleted: Boolean) {
         if (isCompleted) {
             tvTodoTitle.paintFlags = tvTodoTitle.paintFlags or STRIKE_THRU_TEXT_FLAG
@@ -44,21 +41,21 @@ class TodoAdapter(
     }
 
     override fun onBindViewHolder(holder: TodoViewHolder, position: Int) {
-        val currentTodo= todos[position]
+        val currentTodo = todos[position]
         holder.itemView.apply {
             val tvTodoTitle = findViewById<TextView>(R.id.tvTodoTitle)
             val cbDone = findViewById<CheckBox>(R.id.cbDone)
             tvTodoTitle.text = currentTodo.title
             cbDone.isChecked = currentTodo.isCompleted
             switchStrikeThrough(tvTodoTitle, currentTodo.isCompleted)
-            cbDone.setOnCheckedChangeListener { _, isCompleted ->
-                switchStrikeThrough(tvTodoTitle, isCompleted)
-                currentTodo.isCompleted = !currentTodo.isCompleted
+            cbDone.setOnCheckedChangeListener { _, isChecked ->
+                switchStrikeThrough(tvTodoTitle, isChecked)
+                currentTodo.isCompleted = isChecked
+                // Persist the change in the database.
+                DatabaseApplication.todoDatabase.getTodoDao().updateTodo(currentTodo)
             }
         }
     }
 
-    override fun getItemCount(): Int {
-        return todos.size
-    }
+    override fun getItemCount(): Int = todos.size
 }
